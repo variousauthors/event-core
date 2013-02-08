@@ -2,7 +2,16 @@ class WallPostsController < ApplicationController
   # GET /wall_posts
   # GET /wall_posts.json
   def index
-    @wall_posts = WallPost.all
+    #@wall_posts = WallPost.all
+
+    @graph = Koala::Facebook::API.new('AAACEdEose0cBAE3A2bxZAyETJEIzYBRq3lAAILsbAODjQZB6B84TT8cG9tgo7sMaSQlZALCdazfZAsQZCcOUpHGmiD2i1vDvXjtdUHvYXZC2ZBk9y88hBI4')
+
+    profile = @graph.get_object("me")
+    friends = @graph.get_connections("me", "friends")
+    @wall_posts = @graph.get_connections("me", "feed")
+
+    puts 'profile: ' + profile.inspect
+    puts 'friends: ' + friends.inspect
 
     respond_to do |format|
       format.html # index.html.erb

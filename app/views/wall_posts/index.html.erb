@@ -8,6 +8,8 @@
   </tr>
 
 <% @wall_posts.each do |wall_post| %>
+  <tr><td><p><%= wall_post.inspect %></p></td></tr>
+  
   <tr>
     <td><%= link_to 'Show', wall_post %></td>
     <td><%= link_to 'Edit', edit_wall_post_path(wall_post) %></td>
