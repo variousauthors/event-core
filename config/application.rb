@@ -11,6 +11,16 @@ end
 
 module EventCore
   class Application < Rails::Application
+
+    config.middleware.use Rack::Cors do
+      allow do
+        origins 'http://flatley-cremin2821.myshopify.com'
+        resource '/wall_posts',
+          :headers => :any,
+          :methods => [:get, :options]
+      end
+    end
+
     # Settings in config/environments/* take precedence over those specified here.
     # Application configuration should go into files in config/initializers
     # -- all .rb files in that directory are automatically loaded.

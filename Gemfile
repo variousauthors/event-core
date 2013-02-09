@@ -39,3 +39,5 @@ gem 'jquery-rails'
 #
 
 gem "koala", "~> 1.6.0"
+gem 'rack-cors', :require => 'rack/cors'
+gem 'haml-rails'
