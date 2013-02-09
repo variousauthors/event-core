@@ -1,0 +1,12 @@
+%h1 Straight from my WALL
+%table
+  %tr
+    %th
+    %th
+    %th
+  - @wall_posts.each do |wall_post|
+    %tr
+      %td
+        %h4= wall_post["from"]["name"]
+        %p= wall_post["message"]
+%br

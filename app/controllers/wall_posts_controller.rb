@@ -4,17 +4,19 @@ class WallPostsController < ApplicationController
   def index
     #@wall_posts = WallPost.all
 
-    @graph = Koala::Facebook::API.new('AAACEdEose0cBAE3A2bxZAyETJEIzYBRq3lAAILsbAODjQZB6B84TT8cG9tgo7sMaSQlZALCdazfZAsQZCcOUpHGmiD2i1vDvXjtdUHvYXZC2ZBk9y88hBI4')
+    @graph = Koala::Facebook::API.new('AAACEdEose0cBAMjppECtrdW2bwTalkZAE1aDpUeWL2PeOG5yD5hZAmgIVg1MlIRImBb8ZBhojkyZChgNulZCVbRlR4W3ZAe2XmouqU4LssWyBS8JZC1m4ZBW')
 
     profile = @graph.get_object("me")
     friends = @graph.get_connections("me", "friends")
-    @wall_posts = @graph.get_connections("me", "feed")
+    @wall_posts = @graph.get_connections("me", "feed").select do |wall_post|
+      wall_post.has_key? "status_type"
+    end
 
     puts 'profile: ' + profile.inspect
     puts 'friends: ' + friends.inspect
 
     respond_to do |format|
-      format.html # index.html.erb
+      format.html { render layout: false } # index.html.erb
       format.json { render json: @wall_posts }
     end
   end
